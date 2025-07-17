@@ -17,6 +17,7 @@ RUN apt-get update -y \
     rsync \
     sshpass \
     unzip \
+    wget \
     zip \
     && docker-php-ext-configure gd --with-avif --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-configure intl \
