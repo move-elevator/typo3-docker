@@ -23,6 +23,9 @@ jobs:
           - context: ./php8.4-composer
             image: ghcr.io/move-elevator/php8.4-composer
             sarif: php8.4-composer.sarif
+          - context: ./php8.5-composer
+            image: ghcr.io/move-elevator/php8.5-composer
+            sarif: php8.5-composer.sarif
 
     steps:
       - name: Checkout

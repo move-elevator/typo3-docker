@@ -10,6 +10,7 @@
 This repository provides docker images in [move:elevator](https://www.move-elevator.de/) TYPO3 projects. It is not meant to be used anywhere else.
 
 - [PHP 8.4 with Composer](php8.4-composer/Dockerfile)
+- [PHP 8.5 with Composer](php8.5-composer/Dockerfile)
 
 ## ⚡ Usage
 
