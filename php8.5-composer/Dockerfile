@@ -11,6 +11,7 @@ RUN apt-get update -y \
     libicu-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
+    libsodium-dev \
     libwebp-dev \
     openssh-client \
     python3-pip \
@@ -21,7 +22,7 @@ RUN apt-get update -y \
     zip \
     && docker-php-ext-configure gd --with-avif --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install gd intl
+    && docker-php-ext-install gd intl sodium
 
 # Install python packages for db and file sync
 RUN pip3 install --break-system-packages \
@@ -36,5 +37,6 @@ RUN apt-get clean \
     libicu-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
+    libsodium-dev \
     libwebp-dev \
     && rm -rf /var/lib/apt/lists/* /usr/src/*
