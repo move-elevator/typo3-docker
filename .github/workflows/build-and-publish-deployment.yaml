@@ -26,6 +26,10 @@ jobs:
           - context: ./php8.5-composer
             image: ghcr.io/move-elevator/php8.5-composer
             sarif: php8.5-composer.sarif
+          - context: ./php8.5-composer-node24
+            image: ghcr.io/move-elevator/php8.5-composer-node24
+            sarif: php8.5-composer-node24.sarif
+            trivyignore: ./php8.5-composer-node24/.trivyignore.yaml
 
     steps:
       - name: Checkout
@@ -69,6 +73,7 @@ jobs:
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           image-ref: ${{ matrix.image }}:${{ steps.tag.outputs.tag }}
+          trivyignores: ${{ matrix.trivyignore }}
           format: 'sarif'
           output: '${{ matrix.sarif }}'
           exit-code: '1'
