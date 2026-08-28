@@ -11,6 +11,7 @@ This repository provides docker images in [move:elevator](https://www.move-eleva
 
 - [PHP 8.4 with Composer](php8.4-composer/Dockerfile)
 - [PHP 8.5 with Composer](php8.5-composer/Dockerfile)
+- [PHP 8.5 with Composer and Node 24](php8.5-composer-node24/Dockerfile)
 
 ## ⚡ Usage
 
