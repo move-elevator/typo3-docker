@@ -69,17 +69,31 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+      # The gate and the report are separate runs on purpose: trivy-action ignores the severity
+      # input when format is sarif ("Building SARIF report with all severities"), so a single
+      # sarif step would fail the build on LOW and MEDIUM findings too.
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           image-ref: ${{ matrix.image }}:${{ steps.tag.outputs.tag }}
           trivyignores: ${{ matrix.trivyignore }}
-          format: 'sarif'
-          output: '${{ matrix.sarif }}'
+          format: 'table'
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+
+      - name: Build Trivy SARIF report
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        if: always()
+        with:
+          image-ref: ${{ matrix.image }}:${{ steps.tag.outputs.tag }}
+          trivyignores: ${{ matrix.trivyignore }}
+          format: 'sarif'
+          output: '${{ matrix.sarif }}'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@ff2f1c621b7f889edc0d3c761ac2e6a3f8cdb0dd # v4.37.7
