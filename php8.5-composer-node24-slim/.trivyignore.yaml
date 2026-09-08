@@ -1,0 +1,22 @@
+# npm vendors its CLI dependencies inside /usr/local/lib/node_modules/npm/node_modules and ships
+# them unpatched; `npm install -g npm@latest` bundles the same versions, so there is no upgrade
+# path from here. All four are DoS/SSRF issues reachable only when npm itself parses hostile
+# input, which does not happen in a build pipeline.
+#
+# `expired_at` is what keeps this file honest: Trivy never reports an ignore rule that matched
+# nothing, so without an expiry these entries would suppress silently long after npm fixed them.
+# On the first scheduled build past the date the findings come back and fail the job. Check each
+# one then: still present means push the date out, gone means delete the entry.
+vulnerabilities:
+  - id: CVE-2026-14257
+    statement: 'brace-expansion: DoS via memory exhaustion in expand()'
+    expired_at: 2026-11-30
+  - id: CVE-2026-69152
+    statement: 'brace-expansion: DoS via unbounded intermediate arrays'
+    expired_at: 2026-11-30
+  - id: CVE-2026-69192
+    statement: 'ip-address: SSRF via inconsistent IP address parsing'
+    expired_at: 2026-11-30
+  - id: CVE-2026-73566
+    statement: 'node-tar: DoS via crafted long-path tar archive'
+    expired_at: 2026-11-30

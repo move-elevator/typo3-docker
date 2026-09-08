@@ -23,13 +23,23 @@ jobs:
           - context: ./php8.4-composer
             image: ghcr.io/move-elevator/php8.4-composer
             sarif: php8.4-composer.sarif
+          - context: ./php8.4-composer-slim
+            image: ghcr.io/move-elevator/php8.4-composer-slim
+            sarif: php8.4-composer-slim.sarif
           - context: ./php8.5-composer
             image: ghcr.io/move-elevator/php8.5-composer
             sarif: php8.5-composer.sarif
+          - context: ./php8.5-composer-slim
+            image: ghcr.io/move-elevator/php8.5-composer-slim
+            sarif: php8.5-composer-slim.sarif
           - context: ./php8.5-composer-node24
             image: ghcr.io/move-elevator/php8.5-composer-node24
             sarif: php8.5-composer-node24.sarif
             trivyignore: ./php8.5-composer-node24/.trivyignore.yaml
+          - context: ./php8.5-composer-node24-slim
+            image: ghcr.io/move-elevator/php8.5-composer-node24-slim
+            sarif: php8.5-composer-node24-slim.sarif
+            trivyignore: ./php8.5-composer-node24-slim/.trivyignore.yaml
 
     steps:
       - name: Checkout
