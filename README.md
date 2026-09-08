@@ -10,8 +10,13 @@
 This repository provides docker images in [move:elevator](https://www.move-elevator.de/) TYPO3 projects. It is not meant to be used anywhere else.
 
 - [PHP 8.4 with Composer](php8.4-composer/Dockerfile)
+- [PHP 8.4 with Composer (slim)](php8.4-composer-slim/Dockerfile)
 - [PHP 8.5 with Composer](php8.5-composer/Dockerfile)
+- [PHP 8.5 with Composer (slim)](php8.5-composer-slim/Dockerfile)
 - [PHP 8.5 with Composer and Node 24](php8.5-composer-node24/Dockerfile)
+- [PHP 8.5 with Composer and Node 24 (slim)](php8.5-composer-node24-slim/Dockerfile)
+
+The `slim` variants omit `python3-pip` and the legacy `db-sync-tool`/`file-sync-tool` Python packages. Use them once your project has migrated to [`konradmichalik/php-sync-tool`](https://github.com/konradmichalik/php-sync-tool).
 
 ## ⚡ Usage
 
