@@ -1,0 +1,36 @@
+FROM php:8.4
+LABEL authors="move elevator GmbH"
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+RUN apt-get update -y \
+    && apt-get upgrade -y \
+    && apt-get install -y --no-install-recommends \
+    git \
+    libavif-dev \
+    libfreetype6-dev \
+    libicu-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libsodium-dev \
+    libwebp-dev \
+    openssh-client \
+    rsync \
+    sshpass \
+    unzip \
+    wget \
+    zip \
+    && docker-php-ext-configure gd --with-avif --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install gd intl sodium
+
+# Cleanup unused packages and cache
+RUN apt-get clean \
+    && apt-get -y purge \
+    libavif-dev \
+    libfreetype6-dev \
+    libicu-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libsodium-dev \
+    libwebp-dev \
+    && rm -rf /var/lib/apt/lists/* /usr/src/*
