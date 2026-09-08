@@ -39,7 +39,7 @@ jobs:
           - context: ./php8.5-composer-node24-slim
             image: ghcr.io/move-elevator/php8.5-composer-node24-slim
             sarif: php8.5-composer-node24-slim.sarif
-            trivyignore: ./php8.5-composer-node24-slim/.trivyignore.yaml
+            trivyignore: ./php8.5-composer-node24/.trivyignore.yaml
 
     steps:
       - name: Checkout
